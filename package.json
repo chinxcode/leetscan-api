@@ -1,0 +1,18 @@
+{
+    "name": "leetscan-api",
+    "version": "1.0.0",
+    "description": "An API for fetching and analyzing leetcode profiles",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "chinxcode",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.21.0",
+        "express-rate-limit": "^7.4.0",
+        "node-fetch": "^3.3.2"
+    }
+}
