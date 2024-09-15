@@ -2,8 +2,11 @@ import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { fetchUserProfile } from "./fetchUserProfile.js";
-import { readFile } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -14,21 +17,18 @@ app.use(
 );
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
+    windowMs: 15 * 60 * 1000,
+    max: 100,
 });
 
 app.use(limiter);
 
-app.get("/", async (req, res) => {
-    try {
-        const filePath = path.join(process.cwd(), "landing.html");
-        const content = await readFile(filePath, "utf8");
-        res.send(content);
-    } catch (err) {
-        console.error("Error reading landing page:", err);
-        res.status(500).send("Error loading landing page");
-    }
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, private");
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+    res.sendFile(path.join(__dirname, "public", "styles.css"));
 });
 
 app.get("/:username", fetchUserProfile);

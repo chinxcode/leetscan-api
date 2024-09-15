@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="LeetScan API allows you to fetch and analyze LeetCode user profiles, providing detailed statistics and insights for developers and recruiters."
+        />
+        <meta
+            name="keywords"
+            content="LeetScan API, LeetCode API, developer profiles, coding statistics, tech recruitment, coding contests"
+        />
+        <meta name="author" content="https://github.com/chinxcode" />
+        <meta name="robots" content="index, follow" />
+
+        <title>LeetScan API</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1><i class="fas fa-code icon"></i>LeetScan API</h1>
+            <p>
+                <i class="fas fa-info-circle icon"></i>Welcome to the LeetScan API! This powerful tool allows you to fetch and analyze user
+                profiles from LeetCode with ease.
+            </p>
+            <p><i class="fas fa-cogs icon"></i>To use the API, make a GET request to the following endpoint:</p>
+            <div class="endpoint">GET /<span class="highlight">username</span></div>
+            <p>
+                <i class="fas fa-user icon"></i>Replace <span class="highlight">username</span> with the LeetCode username you want to fetch
+                the profile for.
+            </p>
+            <div class="search-container">
+                <input type="text" placeholder="Enter LeetCode username" id="username-input" />
+                <button onclick="searchProfile()"><i class="fas fa-search"></i></button>
+            </div>
+            <p style="text-align: center; margin-top: 2rem">
+                <a href="https://github.com/chinxcode/leetscan-api" target="_blank" class="btn">
+                    <i class="fab fa-github icon"></i>View on GitHub
+                </a>
+            </p>
+        </div>
+
+        <script>
+            function searchProfile() {
+                const username = document.getElementById("username-input").value;
+                if (username) {
+                    window.location.href = `/${username}`;
+                }
+            }
+
+            document.getElementById("username-input").addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    searchProfile();
+                }
+            });
+        </script>
+    </body>
+</html>
