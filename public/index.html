@@ -1,68 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-            name="description"
-            content="LeetScan API allows you to fetch and analyze LeetCode user profiles, providing detailed statistics and insights for developers and recruiters."
-        />
-        <meta
-            name="keywords"
-            content="LeetScan API, LeetCode API, developer profiles, coding statistics, tech recruitment, coding contests"
-        />
-        <meta name="author" content="https://github.com/chinxcode" />
-        <meta name="robots" content="index, follow" />
-
-        <title>LeetScan API</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
-        <div class="container">
-            <h1><i class="fas fa-code icon"></i>LeetScan API</h1>
-            <p>
-                <i class="fas fa-info-circle icon"></i>Welcome to the LeetScan API! This powerful tool allows you to fetch and analyze user
-                profiles from LeetCode with ease.
-            </p>
-            <p><i class="fas fa-cogs icon"></i>To use the API, make a GET request to the following endpoint:</p>
-            <div class="endpoint">GET /<span class="highlight">username</span></div>
-            <p>
-                <i class="fas fa-user icon"></i>Replace <span class="highlight">username</span> with the LeetCode username you want to fetch
-                the profile for.
-            </p>
-            <div class="search-container">
-                <input type="text" placeholder="Enter LeetCode username" id="username-input" />
-                <button onclick="searchProfile()"><i class="fas fa-search"></i></button>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+        name="description"
+        content="LeetScan API allows you to fetch and analyze LeetCode user profiles, providing detailed statistics and insights for developers and recruiters."
+    />
+    <meta
+        name="keywords"
+        content="LeetScan API, LeetCode API, developer profiles, coding statistics, tech recruitment, coding contests"
+    />
+    <meta name="author" content="https://github.com/chinxcode" />
+    <meta name="robots" content="index, follow" />
+    <title>LeetScan API Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-code icon"></i>LeetScan API</h1>
+        <p class="subtitle">Fetch and analyze LeetCode user profiles with ease</p>
+    </header>
+    <div class="container">
+        <main>
+            <nav>
+                <ul>
+                    <li><a href="#introduction"><i class="fas fa-info-circle icon"></i>Introduction</a></li>
+                    <li><a href="#usage"><i class="fas fa-cogs icon"></i>Usage</a></li>
+                    <li><a href="#endpoints"><i class="fas fa-link icon"></i>Endpoints</a></li>
+                    <li><a href="#try-it"><i class="fas fa-play icon"></i>Try It</a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <p>
+                        Welcome to the LeetScan API! This powerful tool allows you to fetch and analyze user profiles from LeetCode with ease. Whether you're a developer looking to showcase your coding prowess or a recruiter searching for top talent, LeetScan API provides the insights you need.
+                    </p>
+                </section>
+                <section id="usage">
+                    <h2>Usage</h2>
+                    <p>
+                        To use the API, make a GET request to our endpoint with the desired LeetCode username. The API will return a JSON object containing detailed information about the user's profile, including problem-solving statistics, contest rankings, and more.
+                    </p>
+                </section>
+                <section id="endpoints">
+                    <h2>Endpoints</h2>
+                    <h3>Single User Profile</h3>
+                    <div class="endpoint">GET /<span class="highlight">:username</span></div>
+                    <p>
+                        Replace <span class="highlight">:username</span> with the LeetCode username you want to fetch the profile for.
+                    </p>
+                    <h3>Multiple User Profiles</h3>
+                    <div class="endpoint">POST /multi</div>
+                    <p>
+                        Send a POST request with a JSON body containing an array of usernames:
+                        <pre><code>{
+    "usernames": ["user1", "user2", "user3"]
+}</code></pre>
+                    </p>
+                </section>
+                <section id="try-it">
+                    <h2>Try It</h2>
+                    <p>Enter a LeetCode username to fetch their profile:</p>
+                    <div class="search-container">
+                        <input type="text" placeholder="Enter LeetCode username" id="username-input" />
+                        <button onclick="searchProfile()"><i class="fas fa-search"></i></button>
+                    </div>
+                </section>
+                <p style="text-align: center; margin-top: 2rem">
+                    <a href="https://github.com/chinxcode/leetscan-api" target="_blank" class="btn">
+                        <i class="fab fa-github icon"></i>View on GitHub
+                    </a>
+                </p>
             </div>
-            <p style="text-align: center; margin-top: 2rem">
-                <a href="https://github.com/chinxcode/leetscan-api" target="_blank" class="btn">
-                    <i class="fab fa-github icon"></i>View on GitHub
-                </a>
-            </p>
-        </div>
-
-        <script>
-            function searchProfile() {
-                const username = document.getElementById("username-input").value;
-                if (username) {
-                    window.location.href = `/${username}`;
-                }
+        </main>
+    </div>
+    <footer>
+        <p class="attribution">Made with <i class="fas fa-heart" style="color: var(--secondary-color);"></i> by <a href="https://github.com/chinxcode/" style="color: var(--secondary-color); text-decoration: none;">Sachin Sharma</a></p>
+    </footer>
+    <script>
+        function searchProfile() {
+            const username = document.getElementById("username-input").value;
+            if (username) {
+                window.location.href = `/${username}`;
             }
-
-            document.getElementById("username-input").addEventListener("keyup", function (event) {
-                if (event.key === "Enter") {
-                    searchProfile();
-                }
-            });
-        </script>
-        <script>
-            window.va =
-                window.va ||
-                function () {
-                    (window.vaq = window.vaq || []).push(arguments);
-                };
-        </script>
-        <script defer src="/_vercel/insights/script.js"></script>
-    </body>
+        }
+        document.getElementById("username-input").addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                searchProfile();
+            }
+        });
+    </script>
+    <script>
+        window.va =
+            window.va ||
+            function () {
+                (window.vaq = window.vaq || []).push(arguments);
+            };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
 </html>
