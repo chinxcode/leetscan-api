@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-import { fetchUserProfile } from "./fetchUserProfile.js";
+import { fetchUserProfile, fetchMultipleUserProfiles } from "./fetchUserProfile.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -22,6 +22,7 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+app.use(express.json());
 
 app.use(express.static("public"));
 
@@ -32,6 +33,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:username", fetchUserProfile);
+
+app.post("/multi", fetchMultipleUserProfiles);
 
 const PORT = 8000;
 app.listen(PORT, () => {

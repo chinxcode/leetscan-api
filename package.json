@@ -4,6 +4,7 @@
     "description": "An API for fetching and analyzing leetcode profiles",
     "main": "server.js",
     "type": "module",
+    "license": "MIT",
     "scripts": {
         "start": "node server.js"
     },

@@ -128,3 +128,48 @@ export const fetchUserProfile = (req, res) => {
             res.status(500).json({ error: "Internal server error", details: err.message });
         });
 };
+
+export const fetchMultipleUserProfiles = async (req, res) => {
+    const { usernames } = req.body;
+
+    if (!usernames || !Array.isArray(usernames)) {
+        return res.status(400).json({ error: "Usernames must be an array" });
+    }
+
+    try {
+        const profilePromises = usernames.map((username) =>
+            fetch("https://leetcode.com/graphql", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Referer: "https://leetcode.com",
+                    "User-Agent":
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                },
+                body: JSON.stringify({
+                    query: query,
+                    variables: { username: username },
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.errors) {
+                        return { username, error: "User not found or API error", details: data.errors };
+                    } else {
+                        return { username, profile: formatData(data.data) };
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error fetching profile for", username, err);
+                    return { username, error: "Internal server error", details: err.message };
+                })
+        );
+
+        const profiles = await Promise.all(profilePromises);
+
+        res.json(profiles);
+    } catch (err) {
+        console.error("Error fetching multiple user profiles:", err);
+        res.status(500).json({ error: "Internal server error", details: err.message });
+    }
+};
