@@ -136,9 +136,13 @@ For more detailed information about the API, including request/response formats 
 
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/chinxcode/leetScan-api/issues).
 
-## 📝 License
+## 📝 Projects made with LeetScan  
 
-This project is [MIT](https://opensource.org/licenses/MIT) licensed.
+1. **[devArena Leaderboard](https://github.com/chinxcode/devArena-leaderboard):**  
+   This leaderboard application leverages the **[LeetScan API](https://github.com/chinxcode/leetscan-api)** to fetch coding profiles from LeetCode and display relevant statistics. It retrieves data from MongoDB and is built using Express.js with dotenv for environment variables, mongoose for database interactions, and express-rate-limit for rate limiting. Additionally, it includes CORS for unrestricted origins, making it a robust and secure solution for managing developer leaderboards.  
+
+2. **[Profile Data Handler](https://github.com/chinxcode/profile-data-handler):**  
+   This backend service integrates the **[LeetScan API](https://github.com/chinxcode/leetscan-api)** to handle user profile data efficiently. It fetches LeetCode statistics and provides APIs for CRUD operations, enabling seamless data management and integration with other systems. Designed with scalability and performance in mind, it is ideal for managing and analyzing user profiles.  
 
 ---
 
