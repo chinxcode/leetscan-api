@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Batch API Request</title>
+    </head>
+    <body>
+        <h1>Batch Request Example</h1>
+        <button id="fetchUsersBtn">Fetch User Profiles</button>
+
+        <div id="response"></div>
+
+        <script>
+            document.getElementById("fetchUsersBtn").addEventListener("click", async () => {
+                const usernames = [
+                    "rishabh1",
+                    "rishabh2",
+                    "rishabh3",
+                    "rishabh4",
+                    "rishabh5",
+                    "rishabh6",
+                    "rishabh7",
+                    "rishabh8",
+                    "rishabh9",
+                    "rishabh10",
+                    "rishabh11",
+                    "rishabh12",
+                    "rishabh13",
+                    "rishabh14",
+                    "rishabh15",
+                    "rishabh16",
+                    "rishabh17",
+                    "rishabh18",
+                    "rishabh19",
+                    "rishabh20",
+                ];
+
+                const apiUrl = "https://leetscan.vercel.app/multi";
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ usernames: usernames }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch data");
+                    }
+
+                    const data = await response.json();
+
+                    document.getElementById("response").innerHTML = `
+                    <h2>Fetched Profiles:</h2>
+                    <pre>${JSON.stringify(data, null)}</pre>
+                `;
+                } catch (error) {
+                    console.error("Error:", error);
+                    document.getElementById("response").innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+                }
+            });
+        </script>
+    </body>
+</html>
